@@ -1,0 +1,52 @@
+version: '3.9'
+
+
+services:
+  nginx:
+    build: ./nginx/
+    container_name: nginx-container
+    ports:
+    - 80:80
+    depends_on:
+      - php
+    volumes_from:
+      - app-data
+      # - ./www/html/:/var/www/html/
+  
+  php:
+    build: ./php/
+    container_name: php-container
+    expose:
+      - 9000
+    volumes_from:
+      - app-data
+      # - ./www/html/:/var/www/html/
+    depends_on:
+      - mysqldb
+  
+  app-data:
+    image: php:7.0-fpm
+    container_name: mydata-container
+    volumes:
+      - ./www/html/:/var/www/html/
+    command: "true"
+  
+
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysql-container
+    volumes_from:
+      - mysql-data
+    environment:
+      MYSQL_ROOT_PASSWORD: secretanything
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: jideuser
+      MYSQL_PASSWORD: password
+
+  
+  mysql-data:
+    image: mysql:5.7
+    container_name: mysql-data-container
+    volumes:
+      - /var/lib/mysql
+    command: "true"
