@@ -63,27 +63,27 @@
                         $connection = new PDO("mysql:host={$host};dbname={$database};charset=utf8", $user, $password);
                         $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                         
-                        // $sql = "CREATE TABLE employees (
-                        //     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                        //     firstname VARCHAR(30) NOT NULL,
-                        //     lastname VARCHAR(30) NOT NULL,
-                        //     email VARCHAR(50),
-                        //     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-                        //     )";
+                        $sql = "CREATE TABLE employees (
+                            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                            firstname VARCHAR(30) NOT NULL,
+                            lastname VARCHAR(30) NOT NULL,
+                            email VARCHAR(50),
+                            reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                            )";
                         
-                        // $connection->exec($sql);
-                        // echo "<p>Table employees created successfully!</p>";
+                        $connection->exec($sql);
+                        echo "<p>Table employees created successfully!</p>";
 
-                        // // begin the transaction
-                        // $connection->beginTransaction();
-                        // // our SQL statements
-                        // $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('John', 'Doe', 'john@example.com')");
-                        // $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('Mary', 'Moe', 'mary@example.com')");
-                        // $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('Julie', 'Dooley', 'julie@example.com')");
+                        // begin the transaction
+                        $connection->beginTransaction();
+                        // our SQL statements
+                        $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('John', 'Doe', 'john@example.com')");
+                        $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('Mary', 'Moe', 'mary@example.com')");
+                        $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('Julie', 'Dooley', 'julie@example.com')");
 
-                        // // commit the transaction
-                        // $connection->commit();
-                        // echo "<p>New records created successfully</p>";
+                        // commit the transaction
+                        $connection->commit();
+                        echo "<p>New records created successfully</p>";
                         
                        $stmt = $connection->prepare("SELECT id, firstname, lastname FROM employees");
                         $stmt->execute();
