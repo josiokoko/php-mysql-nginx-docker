@@ -74,25 +74,25 @@
                         $connection->exec($sql);
                         echo "<p>Table employees created successfully!</p>";
 
-                    //     // begin the transaction
-                    //     $connection->beginTransaction();
-                    //     // our SQL statements
-                    //     $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('John', 'Doe', 'john@example.com')");
-                    //     $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('Mary', 'Moe', 'mary@example.com')");
-                    //     $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('Julie', 'Dooley', 'julie@example.com')");
+                        // begin the transaction
+                        $connection->beginTransaction();
+                        // our SQL statements
+                        $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('John', 'Doe', 'john@example.com')");
+                        $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('Mary', 'Moe', 'mary@example.com')");
+                        $connection->exec("INSERT INTO employees (firstname, lastname, email) VALUES ('Julie', 'Dooley', 'julie@example.com')");
 
-                    //     // commit the transaction
-                    //     $connection->commit();
-                    //     echo "<p>New records created successfully</p>";
+                        // commit the transaction
+                        $connection->commit();
+                        echo "<p>New records created successfully</p>";
                         
-                    //    $stmt = $connection->prepare("SELECT id, firstname, lastname FROM employees");
-                    //     $stmt->execute();
+                       $stmt = $connection->prepare("SELECT id, firstname, lastname FROM employees");
+                        $stmt->execute();
 
-                    //     // set the resulting array to associative
-                    //     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                    //     foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-                    //         echo $v;
-                    //     } 
+                        // set the resulting array to associative
+                        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                        foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+                            echo $v;
+                        } 
                     } catch(PDOException $e) {
                         echo "Error: " . $e->getMessage();
                     }
